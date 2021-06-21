@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: ubuntu, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  color: #fff;
+
+  background-color: #333;
+}
+
+.container {
+  height: inherit;
+  padding: 50px 0;
+
+  transition: filter 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+@media (max-width: 568px) {
+  .container {
+    max-width: 320px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 568px) {
+  .container {
+    max-width: 568px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 0.3em;
+}
+
+select,
+input {
+  height: 2em;
+  padding: 4px 10px;
+
+  font-family: inherit;
+  font-size: inherit;
+}
+
+select {
+  width: 100%;
+  height: 100%;
+}
+
+input[type="text"] {
+  flex-grow: 8;
+  height: 100%;
+  border: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+input[type="button"] {
+  flex-grow: 2;
+  height: 100%;
+  border: 0;
+
+  background: #555;
+  color: white;
+
+  transition: 0.2s ease-in-out;
+}
+
+input[type="button"]:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+
+input[type="button"]:hover {
+  background: #888;
+  transition: 0.2s ease-in-out;
+}
+
+fieldset {
+  max-width: 420px;
+
+  border: 0;
+  margin-bottom: 1.5em;
+}
+
+#home-edit {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 2em;
+}
+
+.home-edit__validity {
+  position: absolute;
+  z-index: -1;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 6px;
+  background: red;
+  opacity: 0;
+
+  transition: 0.4s ease-in-out;
+  content: "";
+}
+
+.__invalid {
+  opacity: 1;
+
+  transition: 0.4s ease-in-out;
+  animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+  8%,
+  41% {
+    transform: translateX(-10px);
+  }
+  25%,
+  58% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  92% {
+    transform: translateX(5px);
+  }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+}
