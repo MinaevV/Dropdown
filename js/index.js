@@ -12,33 +12,38 @@ const fieldValidity = document.querySelector(".home-edit__validity");
 const defaultOptions = ["Home 1", "Home 2", "Home 3"];
 let options = defaultOptions.slice();
 
-const defaultIndex = 0;
+const defaultIndex = ["0"];
+let index = defaultIndex.slice();
 
 // localStorage.clear();
 
 if (localStorage.options === undefined) {
   console.log("list was empty, filled");
   setDefaults();
-  loadDefaults();
+  load();
 } else {
   console.log("list is not emgty, loaded from lS");
-
-  loadDefaults();
+  load();
+  newName.value = list[list.selectedIndex].value;
 }
-
-init();
 
 function setDefaults() {
   localStorage.options = JSON.stringify(options);
+  localStorage.index = JSON.stringify(index);
 }
 
-function loadDefaults() {
+function load() {
   const parsedOptions = JSON.parse(localStorage.options);
-
 
   parsedOptions.forEach((el) => {
     addDOMElement(el);
   });
+
+  newName.value = list[list.selectedIndex].value;
+  
+  index = JSON.parse(localStorage.index);
+  list.selectedIndex = index;
+  localStorage.index = JSON.stringify(index);
 }
 
 function addDOMElement(el) {
@@ -46,8 +51,6 @@ function addDOMElement(el) {
   tempOpt.text = tempOpt.value = el;
   document.querySelector("select").append(tempOpt);
 }
-
-// tempOpt.text = tempOpt.value = newName.value;
 
 // add as html options to select
 // save to LS
@@ -77,19 +80,22 @@ function validation() {
   }
 }
 
-function init() {
-  newName.value = list[list.selectedIndex].value;
-}
-
-
 listParent.addEventListener("change", () => {
   newName.value = list[list.selectedIndex].value;
+  index = [`${list.selectedIndex}`];
+  localStorage.index = JSON.stringify(index);
 });
 
 editBtn.addEventListener("click", () => {
   if (validation()) {
-    list[list.selectedIndex].value = list[list.selectedIndex].text = options[list.selectedIndex] = newName.value;
+    localStorage.options = JSON.parse(localStorage.options);
+
+    list[list.selectedIndex].value =
+      list[list.selectedIndex].text =
+      options[list.selectedIndex] =
+        newName.value;
     localStorage.options = JSON.stringify(options);
+    newName.value = list[list.selectedIndex].value;
   }
 });
 
@@ -97,12 +103,18 @@ addBtn.addEventListener("click", () => {
   const value = newName.value.trim();
 
   if (value.length) {
-    options.push(value);
-    localStorage.options = JSON.stringify(options);
-    addDOMElement(value);
+    valid();
 
+    localStorage.options = JSON.parse(localStorage.options);
+    options.push(value);
+    addDOMElement(value);
+    localStorage.options = JSON.stringify(options);
+    
     // select added option
     list[list.length - 1].selected = true;
+    newName.value = list[list.selectedIndex].value;
+    index = list.selectedIndex;
+    localStorage.index = JSON.stringify(index);
   } else {
     invalid();
   }
