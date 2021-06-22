@@ -11,11 +11,6 @@ const fieldValidity = document.querySelector(".home-edit__validity");
 
 updValue();
 
-editBtn.addEventListener("click", () => {
-  validation();
-  updValue();
-});
-
 function valid() {
   field.classList.remove("__invalid");
   fieldValidity.classList.remove("__invalid");
@@ -49,4 +44,24 @@ function updValue() {
 
 listParent.addEventListener("change", () => {
   updValue();
+});
+
+editBtn.addEventListener("click", () => {
+  validation();
+  updValue();
+});
+
+addBtn.addEventListener("click", () => {
+  const value = newName.value.trim();
+
+  if (value.length) {
+    const tempOpt = document.createElement("option");
+    tempOpt.value = newName.value;
+    tempOpt.text = newName.value;
+    document.querySelector("select").append(tempOpt);
+
+    updValue();
+  } else {
+    invalid();
+  }
 });
