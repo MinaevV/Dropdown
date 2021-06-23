@@ -75,6 +75,16 @@ input {
 
   font-family: inherit;
   font-size: inherit;
+  outline: 0;
+  transition: 0.2s ease-in-out;
+  border: 2px solid transparent;
+
+  background-color: #999;
+}
+
+select:focus ,
+input:focus {
+  border: 2px solid white;
 }
 
 select {
@@ -85,8 +95,11 @@ select {
 input[type="text"] {
   flex-grow: 8;
   height: 100%;
-  border: 0;
   border-radius: 4px 0 0 4px;
+}
+
+input[type="text"]::placeholder {
+  color: #333;
 }
 
 input[type="button"] {
@@ -105,7 +118,12 @@ input[type="button"]:last-of-type {
 }
 
 input[type="button"]:hover {
-  background: #888;
+  background: #000;
+  transition: 0.2s ease-in-out;
+}
+
+input[type="button"]:focus-visible {
+  background: #000;
   transition: 0.2s ease-in-out;
 }
 
@@ -123,31 +141,20 @@ fieldset {
   flex-direction: row;
   justify-content: flex-start;
   height: 2em;
-}
-
-.home-edit__validity {
-  position: absolute;
-  z-index: -1;
-  top: -2px;
-  right: -2px;
-  bottom: -2px;
-  left: -2px;
-
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  border-radius: 6px;
-  background: red;
-  opacity: 0;
+  box-sizing: content-box;
+  border-radius: 4px;
 
   transition: 0.4s ease-in-out;
-  content: "";
 }
 
-.__invalid {
-  opacity: 1;
-
+.__invalid-anim {
   transition: 0.4s ease-in-out;
   animation: shake 0.5s linear;
+}
+
+.__invalid-highlight {
+  box-shadow: 0px 0px 0px 2px red;
+  transition: 0.4s ease-in-out;
 }
 
 @keyframes shake {
